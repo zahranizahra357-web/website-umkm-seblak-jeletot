@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form Webinar</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <header>
+        <h1>Pendaftaran Webinar Produk</h1>
+    </header>
+
+    <main>
+        <h2>Daftar Webinar</h2>
+        <p>Silakan isi formulir berikut untuk mengikuti webinar promosi produk.</p>
+
+        <form id="formWebinar" action="#" method="post">
+            <fieldset>
+                <legend>Formulir Pendaftaran Webinar</legend>
+
+                <!-- NAMA -->
+                <label for="nama">Nama Lengkap:</label>
+                <input type="text" id="nama" required>
+                <small class="error" id="errNama"></small>
+                <br><br>
+
+                <!-- EMAIL -->
+                <label for="email">Email:</label>
+                <input type="email" id="email" required>
+                <small class="error" id="errEmail"></small>
+                <br><br>
+
+                <!-- NO HP -->
+                <label for="hp">No HP:</label>
+                <input type="text" id="hp" required>
+                <small class="error" id="errHp"></small>
+                <br><br>
+
+                <!-- TOPIK WEBINAR -->
+                <label for="topik">Pilih Topik Webinar:</label>
+                <select id="topik" required>
+                    <option value="">-- Pilih Topik --</option>
+                    <option value="marketing">Strategi Marketing Produk</option>
+                    <option value="branding">Branding & Positioning</option>
+                    <option value="ads">Optimasi Iklan Digital</option>
+                </select>
+                <small class="error" id="errTopik"></small>
+                <br><br>
+
+                <!-- SYARAT & KETENTUAN -->
+                <input type="checkbox" id="setuju">
+                <label for="setuju">Saya menyetujui syarat & ketentuan</label>
+                <small class="error" id="errSetuju"></small>
+                <br><br>
+
+                <button type="submit">Daftar</button>
+                <button type="reset">Reset</button>
+
+                <div id="feedback" style="display:none; margin-top:10px;"></div>
+            </fieldset>
+        </form>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Webinar Produk</p>
+    </footer>
+
+    <script>
+        const form = document.getElementById("formWebinar");
+        const nama = document.getElementById("nama");
+        const email = document.getElementById("email");
+        const hp = document.getElementById("hp");
+        const topik = document.getElementById("topik");
+        const setuju = document.getElementById("setuju");
+        const feedback = document.getElementById("feedback");
+
+        const errNama = document.getElementById("errNama");
+        const errEmail = document.getElementById("errEmail");
+        const errHp = document.getElementById("errHp");
+        const errTopik = document.getElementById("errTopik");
+        const errSetuju = document.getElementById("errSetuju");
+
+        // VALIDASI REAL-TIME
+        nama.addEventListener("input", () => {
+            errNama.textContent = nama.value.length < 3 
+                ? "Nama minimal 3 karakter"
+                : "";
+        });
+
+        email.addEventListener("input", () => {
+            const isYahoo = email.value.endsWith("@yahoo.com");
+            if (isYahoo) {
+                errEmail.textContent = "Email tidak boleh menggunakan domain yahoo.com";
+            } else {
+                errEmail.textContent = "";
+            }
+        });
+
+        hp.addEventListener("input", () => {
+            hp.value = hp.value.replace(/[^0-9]/g, "");
+            errHp.textContent = hp.value.length < 10
+                ? "Nomor HP minimal 10 digit"
+                : "";
+        });
+
+        topik.addEventListener("change", () => {
+            errTopik.textContent = topik.value === "" ? "Silakan pilih topik" : "";
+        });
+
+        setuju.addEventListener("change", () => {
+            errSetuju.textContent = setuju.checked ? "" : "Anda harus menyetujui syarat & ketentuan";
+        });
+
+        // VALIDASI SAAT SUBMIT
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            let valid = true;
+
+            if (nama.value.length < 3) { valid = false; errNama.textContent = "Nama minimal 3 karakter"; }
+            if (email.value.endsWith("@yahoo.com")) { valid = false; errEmail.textContent = "Email tidak boleh yahoo.com"; }
+            if (hp.value.length < 10) { valid = false; errHp.textContent = "Nomor HP minimal 10 digit"; }
+            if (topik.value === "") { valid = false; errTopik.textContent = "Silakan pilih topik"; }
+            if (!setuju.checked) { valid = false; errSetuju.textContent = "Harus dicentang"; }
+
+            if (!valid) {
+                feedback.style.display = "block";
+                feedback.style.color = "red";
+                feedback.textContent = "❌ Form belum lengkap. Periksa kembali!";
+                return;
+            }
+
+            // sukses kirim
+            feedback.style.display = "block";
+            feedback.style.color = "green";
+            feedback.textContent = "✅ Pendaftaran berhasil! Terima kasih.";
+
+            form.reset();
+        });
+    </script>
+
+</body>
+</html>

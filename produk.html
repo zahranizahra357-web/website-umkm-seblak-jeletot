@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      charset="viewport"
+      content=""
+      width="device-width,"
+      intial-scale="1.0"
+    />
+    <title>produk - UMKM Seblak jeletot</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Seblak jeletot</h1>
+      <nav>
+        <ul>
+          <li><a href="index.html">Beranda</a></li>
+          <li><a href="tentang.html">Tentang Kami</a></li>
+          <li><a href="produk.html" class="active">Produk</a></li>
+          <li><a href="galeri.html">Galeri</a></li>
+          <li><a href="kontak.html">Kontak</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      
+        <h2>Produk Unggulan Kami</h2>
+
+<p>Berikut daftar produk Seblak Jeletot kami:</p>
+    <section class="produk-container">
+  <h2>Daftar Produk</h2>
+  <table border="1" cellpadding="10" cellspacing="0" style="width: 100%; border-collapse: collapse;">
+    <thead style="background-color: #f5c2c2;">
+      <tr>
+        <th>Nama Produk</th>
+        <th>Ukuran</th>
+        <th>Harga</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Seblak Ceker</td>
+        <td>Kecil</td>
+        <td>Rp 10.000</td>
+      </tr>
+      <tr>
+        <td>Seblak mie</td>
+        <td>Kecil</td>
+        <td>Rp 10.000</td>
+      </tr>
+      <tr>
+        <td>Seblak Cuanki</td>
+        <td>Sedang</td>
+        <td>Rp 13.000</td>
+      </tr>
+      <tr>
+        <td>Seblak Sosis</td>
+        <td>Besar</td>
+        <td>Rp 15.000</td>
+      </tr>
+      <tr>
+        <td>Seblak Seafood</td>
+        <td>Besar</td>
+        <td>Rp 20.000</td>
+      </tr>
+      <tr>
+        <td>Seblak jamur enoki </td>
+        <td>Sedang</td>
+        <td>Rp 13.000</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+      
+      <h3>Profil Produk</h3>
+      <div class="proses-memasak">
+  <h3>Proses Memasak Seblak</h3>
+  <p>1. Tumis bumbu halus hingga harum.</p>
+  <p>2. Tambahkan air dan tunggu hingga mendidih.</p>
+  <p>3. Masukkan kerupuk dan topping seperti ceker, cuanki, atau sosis.</p>
+  <p>4. Masak hingga bumbu meresap dan sajikan hangat.</p>
+</div>
+       
+      <section class="produk-form">
+        <h2>Hitung Total Belanja</h2>
+        <input type="number" id="harga"   placeholder="Harga per item (Rp)" >
+        <input type="number" id="Jumlah"  placeholder="Jumlah beli">
+        <button onclick="hitungTotal()">Hitung</button>
+        <p id="HasilTotal"></p>
+      </section>
+        
+      <script class>
+        function hitungTotal() {
+          let harga = parseInt(document.getElementById("harga").value);
+          let jumlah = parseInt(document.getElementById("Jumlah").value);
+          let total = harga *jumlah;
+
+          document.getElementById("HasilTotal").textContent = "Total Belanja: Rp " + total;
+       }
+      </script>   
+
+      <section class="produk-form">
+
+       <h2>Cek Kategori Usia Pelanggan</h2>
+       <input type="number" id="usia" placeholder="Masukan usia">
+       <button onclick="cekKategori()">Cek</button>
+       <p id="hasilUsia"></p>
+       </section>
+
+      <script>
+        function cekKategori() {
+          let usia = document.getElementById("usia").value;
+          let hasil = "";
+
+          if (usia <13) hasil = "Anak-anak";
+          else if (usia <=17) hasil = "Remaja";
+          else if (usia <= 60) hasil = "Dewasa";
+          else hasil = "Lansia";
+
+           document.getElementById("hasilUsia").textContent = "Kategori: " + hasil;
+}
+        </script>
+
+        <br><br>
+
+        <h2>Testimoni Pelanggan</h2>
+        <div id="daftar-testimoni"></div>
+
+
+        <script>
+          let testimoniList = [
+              {nama: "Laela", komentar: "Seblaknya pedes sesuai dengan level, tapi nagih banget, isinya banyak harga juga ramah di kantong!", rating: 4},
+              {nama: "Diah", komentar: "Kuahnya kental gurih dan wangi, bikin makin lahap makan. level pedesnya juga bisa dipilih jadi sesuai sama selera!", rating: 5},
+              {nama: "Reyhan", komentar: "Baru pertama langsung suka, toping nya lumayan banyak pas banget!", rating: 5},
+              {nama: "Saira", komentar: "Suka banget sama seblak cuanki nya lembut banget sama sekali ga keras kuahnya juga berbumbu!", rating:4},
+              {nama: "Senja", komentar:"Porsinya besar toping lengkap, harganya pas mantap!", rating: 4 },
+         ];
+
+         let container = document.getElementById("daftar-testimoni");
+
+         testimoniList.forEach(function(item) {
+          let box = document.createElement("div");
+          box.className = "testimoni-box";
+
+          let nama = document.createElement("h4");
+          nama.textContent = item.nama;
+
+          let komen = document.createElement("p");
+          komen.textContent = '"' + item.komentar + '"';
+
+          let rating = document.createElement("p");
+          rating.className = "rating";
+          rating.textContent = "★".repeat(item.rating);
+
+          box.appendChild(nama);
+          box.appendChild(komen);
+          box.appendChild(rating);
+
+          container.appendChild(box);
+         });
+        </script>
+
+        <br><br>
+
+      </section>
+
+      <div class="produk-card">
+    <img src="image/rating.jpg" class="produk-img" alt="Seblak Enak">
+
+    <p>
+        Seblak Cuanki adalah seblak dengan isian cuanki lembut, kerupuk basah, dan bumbu pedas gurih khas Seblak Jeletot. Rasanya mantap, porsinya pas, dan cocok untuk pecinta pedas..
+    </p>
+
+    <p><strong>Rating Produk:</strong> ★★★★☆ Rekomendasi Baik</p>
+</div>
+
+
+      <h3>Dengarkan cerita kami</h3>
+      <audio controls>
+        <source src="audio/audiocerita-umkm.mp3" type="audio/mpeg" />
+        audio tidak tersedia di browser anda.
+      </audio>
+    </main>
+    <footer>
+      <p>&copy; 2025 Seblak jeletot</p>
+    </footer>
+    <!-- panggil Javascript di akhir body-->
+  <script src="script.js"></script>
+  </body>
+</html>
